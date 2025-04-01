@@ -41,6 +41,13 @@ public class AdoptionServiceImpl implements AdoptionService {
         return adoptionRepository.findById(id).map(AdoptionDto::new).orElseThrow(() -> new EntityNotFoundException("Adoption não encontrado"));
     }
     public List<AdoptionDto> getAdoptionByAdopterId(Long id) {
+        if (id == null) {
+            throw new EntityNotFoundException("O id nao pode ser nulo");
+        }
+        if (!id.toString().matches("\\d+")) {
+            throw new EntityNotFoundException("O ID deve ser um número!");
+
+        }
         if (!adopterRepository.existsById(id)) {
             throw new EntityNotFoundException("Adopter nao encontrado");
         }

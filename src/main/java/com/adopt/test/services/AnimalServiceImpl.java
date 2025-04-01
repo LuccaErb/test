@@ -30,6 +30,9 @@ public class AnimalServiceImpl implements AnimalService {
         if (animalDto.getName() == null || animalDto.getName().trim().isEmpty()) {
             throw new InvalidDataException("O nome do animal não pode ser vazio!");
         }
+        if (!animalDto.getName().matches("[a-zA-Z]+") ){
+            throw new InvalidDataException("O nome do animal deve conter apenas letras!");
+        }
         if (animalDto.getAge() == null || animalDto.getAge().trim().isEmpty()) {
             throw new InvalidDataException("A idade do animal deve ser maior que zero!");
         }
@@ -41,6 +44,15 @@ public class AnimalServiceImpl implements AnimalService {
     //get animal id
     @Override
     public AnimalDto getAnimalById(Long id) {
+        if (id == null) {
+            throw new EntityNotFoundException("O ID deve ser um número!");
+        }
+        if (!id.toString().matches("\\d+")) {
+            throw new EntityNotFoundException("O ID deve ser um número!");
+        }
+        if (!repository.existsById(id)) {
+            throw new EntityNotFoundException("Animal nao encontrado");
+        }
 
         return repository.findById(id).map(AnimalDto::new).orElseThrow(() -> new EntityNotFoundException("Animal não encontrado"));
     }
@@ -63,6 +75,7 @@ public class AnimalServiceImpl implements AnimalService {
         if (animalDto.getName() != null && !animalDto.getName().trim().isEmpty()) {
             animal.setName(animalDto.getName());
         }
+
         if (animalDto.getSpecies() != null) {
             animal.setSpecies(animalDto.getSpecies());
         }

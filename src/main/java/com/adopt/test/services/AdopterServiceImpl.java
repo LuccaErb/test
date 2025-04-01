@@ -3,6 +3,7 @@ package com.adopt.test.services;
 import com.adopt.test.domain.dto.AdopterDto;
 import com.adopt.test.domain.dto.AdopterDtoResponse;
 import com.adopt.test.domain.model.Adopter;
+import com.adopt.test.exceptions.InvalidDataException;
 import com.adopt.test.repositories.AdopterRepository;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
@@ -23,12 +24,22 @@ public class AdopterServiceImpl implements AdopterService {
     //buscando adotante especifico
     @Override
     public AdopterDto getAdopterById(Long id) {
+        if (!id.toString().matches("\\d+")) {
+            throw new EntityNotFoundException("O ID deve ser um número!");
+
+        }
+        if (!repository.existsById(id)) {
+            throw new EntityNotFoundException("Adopter nao encontrado");
+        }
         return repository.findById(id).map(AdopterDto::new).orElseThrow(() -> new EntityNotFoundException("Adopter não encontrado"));
     }
 
     //criando adotante por meio do dto
     @Override
     public AdopterDtoResponse addAdopter(AdopterDto adopterDto) {
+        if (!adopterDto.getName().matches("[a-zA-Z]+") ){
+            throw new InvalidDataException("O nome do animal deve conter apenas letras!");
+        }
         Adopter adopter = new Adopter(adopterDto.getName(), adopterDto.getCpf(), adopterDto.getBirth(), adopterDto.getAddress(), adopterDto.getEmail(), adopterDto.getPhone());
         repository.save(adopter);
         return new AdopterDtoResponse(adopter);
