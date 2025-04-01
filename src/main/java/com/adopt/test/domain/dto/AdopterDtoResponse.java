@@ -25,4 +25,6 @@ public class AdopterDtoResponse {
     public AdopterDtoResponse(Adopter adopter) {
         this(adopter.getId(), adopter.getName(), adopter.getCpf(), adopter.getBirth(), adopter.getAddress(), adopter.getEmail(), adopter.getPhone());
     }
+
+
 }
