@@ -2,14 +2,15 @@ package com.adopt.test.services;
 
 import com.adopt.test.domain.dto.AnimalDto;
 
+import com.adopt.test.domain.dto.AnimalDtoReponse;
 import org.springframework.http.ResponseEntity;
 
 import java.util.List;
 
 public interface AnimalService {
     List<AnimalDto> listAllAnimals();
-    AnimalDto addAnimal(AnimalDto animal);
+    AnimalDtoReponse addAnimal(AnimalDto animal);
     AnimalDto getAnimalById(Long id);
     ResponseEntity<String> deleteAnimal(Long id);
-    AnimalDto updateAnimal(Long id, AnimalDto animal);
+    AnimalDtoReponse updateAnimal(Long id, AnimalDto animal);
 }

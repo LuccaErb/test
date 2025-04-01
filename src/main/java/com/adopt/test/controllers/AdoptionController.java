@@ -1,6 +1,7 @@
 package com.adopt.test.controllers;
 
 import com.adopt.test.domain.dto.AdoptionDto;
+import com.adopt.test.domain.dto.AdoptionDtoResponse;
 import com.adopt.test.services.AdoptionService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -35,12 +36,12 @@ public class AdoptionController {
     }
 
     @PostMapping
-    public ResponseEntity<AdoptionDto> addAdoption(@RequestParam Long animalId, @RequestParam Long adopterId) throws Exception {
+    public ResponseEntity<AdoptionDtoResponse> addAdoption(@RequestParam Long animalId, @RequestParam Long adopterId) throws Exception {
         return ResponseEntity.status(HttpStatus.CREATED).body(service.addAdoption(animalId, adopterId));
 
     }
     @PutMapping("/{id}")
-    public ResponseEntity<AdoptionDto> updateAdoption(@PathVariable Long id, @RequestBody AdoptionDto adoptionDto) {
+    public ResponseEntity<AdoptionDtoResponse> updateAdoption(@PathVariable Long id, @RequestBody AdoptionDto adoptionDto) {
         return ResponseEntity.status(HttpStatus.OK).body(service.updateAdoption(id, adoptionDto));
     }
     @DeleteMapping("/{id}")

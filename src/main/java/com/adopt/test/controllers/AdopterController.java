@@ -1,6 +1,7 @@
 package com.adopt.test.controllers;
 
 import com.adopt.test.domain.dto.AdopterDto;
+import com.adopt.test.domain.dto.AdopterDtoResponse;
 import com.adopt.test.services.AdopterService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -31,7 +32,7 @@ public class AdopterController {
     }
     //post
     @PostMapping
-    public ResponseEntity<AdopterDto> addAdopter(@RequestBody AdopterDto adopterDto){
+    public ResponseEntity<AdopterDtoResponse> addAdopter(@RequestBody AdopterDto adopterDto){
         return ResponseEntity.status(HttpStatus.CREATED).body(service.addAdopter(adopterDto));
     }
     //delete
@@ -42,7 +43,7 @@ public class AdopterController {
 
     //put
     @PutMapping("/{id}")
-    public ResponseEntity<AdopterDto> updateAdopter(@PathVariable Long id, @RequestBody AdopterDto adopterDto){
+    public ResponseEntity<AdopterDtoResponse> updateAdopter(@PathVariable Long id, @RequestBody AdopterDto adopterDto){
         return ResponseEntity.status(HttpStatus.OK).body(service.updateAdopter(id, adopterDto));
 
     }

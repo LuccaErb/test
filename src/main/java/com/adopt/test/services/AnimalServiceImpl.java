@@ -1,11 +1,11 @@
 package com.adopt.test.services;
 
 import com.adopt.test.domain.dto.AnimalDto;
+import com.adopt.test.domain.dto.AnimalDtoReponse;
 import com.adopt.test.domain.model.Animal;
 import com.adopt.test.exceptions.InvalidDataException;
 import com.adopt.test.repositories.AnimalRepository;
 import jakarta.persistence.EntityNotFoundException;
-import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -26,17 +26,16 @@ public class AnimalServiceImpl implements AnimalService {
 
     //criando animal por meio do dto
     @Override
-    public AnimalDto addAnimal(AnimalDto animalDto) {
-        if (animalDto.name() == null || animalDto.name().trim().isEmpty()) {
+    public AnimalDtoReponse addAnimal(AnimalDto animalDto) {
+        if (animalDto.getName() == null || animalDto.getName().trim().isEmpty()) {
             throw new InvalidDataException("O nome do animal não pode ser vazio!");
         }
-        if (animalDto.age() == null || animalDto.age().trim().isEmpty()) {
+        if (animalDto.getAge() == null || animalDto.getAge().trim().isEmpty()) {
             throw new InvalidDataException("A idade do animal deve ser maior que zero!");
         }
-
-        Animal animal = new Animal( animalDto.name(), animalDto.species(), animalDto.race(), animalDto.age(), animalDto.status());
+        Animal animal = new Animal(animalDto.getName(), animalDto.getSpecies(), animalDto.getRace(), animalDto.getAge(), animalDto.getStatus());
         repository.save(animal);
-        return new AnimalDto(animal);
+        return new AnimalDtoReponse(animal);
     }
 
     //get animal id
@@ -57,31 +56,31 @@ public class AnimalServiceImpl implements AnimalService {
     }
     //update por id
     @Override
-    public AnimalDto updateAnimal(Long id, AnimalDto animalDto) {
+    public AnimalDtoReponse updateAnimal(Long id, AnimalDto animalDto) {
         Animal animal = repository.findById(id)
                 .orElseThrow(()-> new EntityNotFoundException("Animal nao encontrado"));
 
-        if (animalDto.name() != null && !animalDto.name().trim().isEmpty()) {
-            animal.setName(animalDto.name());
+        if (animalDto.getName() != null && !animalDto.getName().trim().isEmpty()) {
+            animal.setName(animalDto.getName());
         }
-        if (animalDto.species() != null) {
-            animal.setSpecies(animalDto.species());
+        if (animalDto.getSpecies() != null) {
+            animal.setSpecies(animalDto.getSpecies());
         }
-        if (animalDto.race() != null) {
-            animal.setRace(animalDto.race());
+        if (animalDto.getRace() != null) {
+            animal.setRace(animalDto.getRace());
         }
-        if (animalDto.status() != null) {
-            animal.setStatus(animalDto.status());
+        if (animalDto.getStatus() != null) {
+            animal.setStatus(animalDto.getStatus());
         }
 
-        animal.setName(animalDto.name());
-        animal.setSpecies(animalDto.species());
-        animal.setRace(animalDto.race());
-        animal.setAge(animalDto.age());
-        animal.setStatus(animalDto.status());
+        animal.setName(animalDto.getName());
+        animal.setSpecies(animalDto.getSpecies());
+        animal.setRace(animalDto.getRace());
+        animal.setAge(animalDto.getAge());
+        animal.setStatus(animalDto.getStatus());
 
         repository.save(animal);
-        return new AnimalDto(animal);
+        return new AnimalDtoReponse(animal);
     }
 
 

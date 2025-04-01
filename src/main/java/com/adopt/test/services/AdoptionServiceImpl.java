@@ -1,6 +1,7 @@
 package com.adopt.test.services;
 
 import com.adopt.test.domain.dto.AdoptionDto;
+import com.adopt.test.domain.dto.AdoptionDtoResponse;
 import com.adopt.test.domain.model.Adopter;
 import com.adopt.test.domain.model.Adoption;
 import com.adopt.test.domain.model.Animal;
@@ -51,7 +52,7 @@ public class AdoptionServiceImpl implements AdoptionService {
 
     @Override
     @Transactional
-    public AdoptionDto addAdoption(Long animalId, Long adopterId) {
+    public AdoptionDtoResponse addAdoption(Long animalId, Long adopterId) {
         Animal animal = animalRepository.findById(animalId)
                 .orElseThrow(() -> new EntityNotFoundException("Animal não encontrado!"));
 
@@ -72,13 +73,13 @@ public class AdoptionServiceImpl implements AdoptionService {
         animalRepository.save(animal);
         adoptionRepository.save(adoption);
 
-        return new AdoptionDto(adoption);
+        return new AdoptionDtoResponse(adoption);
 
     }
 
     @Override
     @Transactional
-    public AdoptionDto updateAdoption(Long id, AdoptionDto adoptionDto) {
+    public AdoptionDtoResponse updateAdoption(Long id, AdoptionDto adoptionDto) {
         Adoption adoption = adoptionRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Adoção não encontrada!"));
 
@@ -91,7 +92,7 @@ public class AdoptionServiceImpl implements AdoptionService {
 
 
         adoptionRepository.save(adoption);
-        return new AdoptionDto(adoption);
+        return new AdoptionDtoResponse(adoption);
     }
 
     @Override

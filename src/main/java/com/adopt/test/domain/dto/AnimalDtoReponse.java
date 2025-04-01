@@ -1,7 +1,6 @@
 package com.adopt.test.domain.dto;
 
 import com.adopt.test.domain.model.Animal;
-
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -9,10 +8,11 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Getter
-@Setter
+
 @AllArgsConstructor
 @NoArgsConstructor
-public class AnimalDto {
+public class AnimalDtoReponse {
+    private Long id;
     private String name;
     @NotNull
     private String species;
@@ -23,10 +23,7 @@ public class AnimalDto {
     @NotNull
     private Boolean status;
 
-    public AnimalDto(Animal animal) {
-        this(animal.getName(), animal.getSpecies(),animal.getRace(),animal.getAge(), animal.getStatus());
+    public AnimalDtoReponse(Animal animal) {
+        this(animal.getId(), animal.getName(), animal.getSpecies(), animal.getRace(), animal.getAge(), animal.getStatus());
     }
-
-
-
 }

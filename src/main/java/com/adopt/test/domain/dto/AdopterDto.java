@@ -2,19 +2,26 @@ package com.adopt.test.domain.dto;
 
 import com.adopt.test.domain.model.Adopter;
 import jakarta.validation.constraints.NotNull;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
-public record AdopterDto(
+@Getter
+@AllArgsConstructor
+@NoArgsConstructor
+public class AdopterDto {
 
-        @NotNull
-        String name,
-        @NotNull
-        String cpf,
-        @NotNull
-        String birth,
-        String address,
-        String email,
-        @NotNull
-        String phone) {
+
+    @NotNull
+    private String name;
+    @NotNull
+    private String cpf;
+    @NotNull
+    private String birth;
+    private String address;
+    private String email;
+    @NotNull
+    private String phone;
 
     public AdopterDto(Adopter adopter) {
         this( adopter.getName(), adopter.getCpf(), adopter.getBirth(), adopter.getAddress(), adopter.getEmail(), adopter.getPhone());

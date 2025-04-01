@@ -1,6 +1,7 @@
 package com.adopt.test.services;
 
 import com.adopt.test.domain.dto.AdopterDto;
+import com.adopt.test.domain.dto.AdopterDtoResponse;
 import com.adopt.test.domain.model.Adopter;
 import com.adopt.test.repositories.AdopterRepository;
 import jakarta.persistence.EntityNotFoundException;
@@ -27,10 +28,10 @@ public class AdopterServiceImpl implements AdopterService {
 
     //criando adotante por meio do dto
     @Override
-    public AdopterDto addAdopter(AdopterDto adopterDto) {
-        Adopter adopter = new Adopter(adopterDto.name(), adopterDto.cpf(), adopterDto.birth(), adopterDto.address(), adopterDto.email(), adopterDto.phone());
+    public AdopterDtoResponse addAdopter(AdopterDto adopterDto) {
+        Adopter adopter = new Adopter(adopterDto.getName(), adopterDto.getCpf(), adopterDto.getBirth(), adopterDto.getAddress(), adopterDto.getEmail(), adopterDto.getPhone());
         repository.save(adopter);
-        return new AdopterDto(adopter);
+        return new AdopterDtoResponse(adopter);
     }
     //deletando adotante
     @Override
@@ -43,31 +44,31 @@ public class AdopterServiceImpl implements AdopterService {
     }
     //update por id adotante
     @Override
-    public AdopterDto updateAdopter(Long id, AdopterDto adopterDto) {
+    public AdopterDtoResponse updateAdopter(Long id, AdopterDto adopterDto) {
         Adopter adopter = repository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Adotante não encontrado"));
 
         // Atualizando informações
-        if (adopterDto.name() != null) {
-            adopter.setName(adopterDto.name());
+        if (adopterDto.getName() != null) {
+            adopter.setName(adopterDto.getName());
         }
-        if (adopterDto.cpf() != null) {
-            adopter.setCpf(adopterDto.cpf());
+        if (adopterDto.getCpf() != null) {
+            adopter.setCpf(adopterDto.getCpf());
         }
-        if (adopterDto.birth() != null) {
-            adopter.setBirth(adopterDto.birth());
+        if (adopterDto.getBirth() != null) {
+            adopter.setBirth(adopterDto.getBirth());
         }
-        if (adopterDto.address() != null) {
-            adopter.setAddress(adopterDto.address());
+        if (adopterDto.getAddress() != null) {
+            adopter.setAddress(adopterDto.getAddress());
         }
-        if (adopterDto.email() != null) {
-            adopter.setEmail(adopterDto.email());
+        if (adopterDto.getEmail() != null) {
+            adopter.setEmail(adopterDto.getEmail());
         }
-        if (adopterDto.phone() != null) {
-            adopter.setPhone(adopterDto.phone());
+        if (adopterDto.getPhone() != null) {
+            adopter.setPhone(adopterDto.getPhone());
         }
 
         repository.save(adopter);
-        return new AdopterDto(adopter);
+        return new AdopterDtoResponse(adopter);
     }
 }

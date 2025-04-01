@@ -2,6 +2,7 @@ package com.adopt.test.controllers;
 
 import com.adopt.test.domain.dto.AnimalDto;
 
+import com.adopt.test.domain.dto.AnimalDtoReponse;
 import com.adopt.test.services.AnimalService;
 
 import org.springframework.http.HttpStatus;
@@ -28,7 +29,7 @@ public class AnimalController {
     }
 
     @PostMapping
-    public ResponseEntity<AnimalDto> addAnimal( @RequestBody AnimalDto animal) {
+    public ResponseEntity<AnimalDtoReponse> addAnimal(@RequestBody AnimalDto animal) {
 
 
         return ResponseEntity.status(HttpStatus.CREATED).body(service.addAnimal(animal)) ;
@@ -46,7 +47,7 @@ public class AnimalController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<AnimalDto> updateAnimal(@PathVariable Long id, @RequestBody AnimalDto animal) {
+    public ResponseEntity<AnimalDtoReponse> updateAnimal(@PathVariable Long id, @RequestBody AnimalDto animal) {
 
         return ResponseEntity.status(HttpStatus.OK).body(service.updateAnimal(id, animal));
     }
