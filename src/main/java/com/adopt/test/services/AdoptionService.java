@@ -1,7 +1,6 @@
 package com.adopt.test.services;
 
 import com.adopt.test.domain.dto.AdoptionDto;
-import org.springframework.http.ResponseEntity;
 
 import java.util.List;
 
@@ -12,4 +11,7 @@ public interface AdoptionService {
     AdoptionDto updateAdoption(Long id, AdoptionDto adoptionDto);
     void deleteAdoption(Long id);
 
+
+
+    List<AdoptionDto> getAdoptionByAdopterId(Long id);
 }

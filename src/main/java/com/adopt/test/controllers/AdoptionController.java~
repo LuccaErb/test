@@ -21,7 +21,7 @@ public class AdoptionController {
 
     @GetMapping
     public ResponseEntity <List<AdoptionDto>> getAllAdoptions() {
-
+        
         return ResponseEntity.status(HttpStatus.OK).body(service.listAllAdoptions());
     }
 

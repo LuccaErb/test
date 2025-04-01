@@ -51,7 +51,7 @@ public class AdoptionServiceImpl implements AdoptionService {
 
     @Override
     @Transactional
-    public AdoptionDto addAdoption(Long animalId, Long adopterId) {
+    public AdoptionDto addAdoption(Long animalId, Long adopterId) throws Exception{
         Animal animal = animalRepository.findById(animalId)
                 .orElseThrow(() -> new EntityNotFoundException("Animal não encontrado!"));
 

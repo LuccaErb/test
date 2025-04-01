@@ -23,6 +23,7 @@ public class AdoptionDto{
         private Long adopterId;
 
 
+
     public AdoptionDto(Adoption adoption) {
 
         this.dateAdoption = adoption.getDateAdoption();

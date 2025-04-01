@@ -35,9 +35,6 @@ public class AdopterServiceImpl implements AdopterService {
     //deletando adotante
     @Override
     public ResponseEntity<String> deleteAdopter(Long id) {
-        if (!repository.existsById(id)) {
-            throw new EntityNotFoundException("Adotante nao encontrado");
-        }
         repository.deleteById(id);
         return ResponseEntity.ok().body("Adotante deletado com sucesso");
     }
