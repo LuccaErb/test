@@ -1,6 +1,7 @@
 package com.adopt.test.domain.dto;
 
-import com.adopt.test.domain.model.Adopter;
+import com.adopt.test.domain.dto.adopter.AdopterDto;
+import com.adopt.test.domain.model.adopter.Adopter;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;

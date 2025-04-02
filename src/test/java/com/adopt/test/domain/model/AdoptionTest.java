@@ -1,5 +1,8 @@
 package com.adopt.test.domain.model;
 
+import com.adopt.test.domain.model.adopter.Adopter;
+import com.adopt.test.domain.model.adoption.Adoption;
+import com.adopt.test.domain.model.animal.Animal;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;

@@ -1,6 +1,6 @@
 package com.adopt.test.domain.dto;
 
-import com.adopt.test.domain.model.Animal;
+import com.adopt.test.domain.model.animal.Animal;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;

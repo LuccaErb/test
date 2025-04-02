@@ -1,16 +1,13 @@
 package com.adopt.test.services;
 
-import com.adopt.test.domain.dto.AdopterDto;
-import com.adopt.test.domain.dto.AdoptionDto;
-import com.adopt.test.domain.dto.AdoptionDtoResponse;
-import com.adopt.test.domain.model.Adopter;
-import com.adopt.test.domain.model.Adoption;
-import com.adopt.test.domain.model.Animal;
-import com.adopt.test.repositories.AdopterRepository;
-import com.adopt.test.repositories.AdoptionRepository;
-import com.adopt.test.repositories.AnimalRepository;
-import jakarta.persistence.EntityNotFoundException;
-import jakarta.transaction.Transactional;
+import com.adopt.test.domain.dto.adoption.AdoptionDto;
+import com.adopt.test.domain.model.adopter.Adopter;
+import com.adopt.test.domain.model.adoption.Adoption;
+import com.adopt.test.domain.model.animal.Animal;
+import com.adopt.test.repositories.adopter.AdopterRepository;
+import com.adopt.test.repositories.adoption.AdoptionRepository;
+import com.adopt.test.repositories.animal.AnimalRepository;
+import com.adopt.test.services.adoption.AdoptionServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -18,14 +15,11 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import java.time.LocalDate;
 import java.util.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
-
-import java.util.stream.Collectors;
 
 @ExtendWith(MockitoExtension.class)
 

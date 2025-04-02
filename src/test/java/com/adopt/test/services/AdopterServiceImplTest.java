@@ -1,9 +1,10 @@
 package com.adopt.test.services;
 
-import com.adopt.test.domain.dto.AdopterDto;
-import com.adopt.test.domain.dto.AdopterDtoResponse;
-import com.adopt.test.domain.model.Adopter;
-import com.adopt.test.repositories.AdopterRepository;
+import com.adopt.test.domain.dto.adopter.AdopterDto;
+import com.adopt.test.domain.dto.adopter.AdopterDtoResponse;
+import com.adopt.test.domain.model.adopter.Adopter;
+import com.adopt.test.repositories.adopter.AdopterRepository;
+import com.adopt.test.services.adopter.AdopterServiceImpl;
 import jakarta.persistence.EntityNotFoundException;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -16,7 +17,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import static org.hamcrest.Matchers.any;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
 

@@ -1,9 +1,10 @@
 package com.adopt.test.controllers;
 
-import com.adopt.test.domain.dto.AnimalDto;
-import com.adopt.test.domain.dto.AnimalDtoReponse;
-import com.adopt.test.domain.model.Animal;
-import com.adopt.test.services.AnimalService;
+import com.adopt.test.controllers.animal.AnimalController;
+import com.adopt.test.domain.dto.animal.AnimalDto;
+import com.adopt.test.domain.dto.animal.AnimalDtoReponse;
+import com.adopt.test.domain.model.animal.Animal;
+import com.adopt.test.services.animal.AnimalService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;

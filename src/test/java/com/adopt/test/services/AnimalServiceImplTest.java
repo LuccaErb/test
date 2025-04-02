@@ -1,9 +1,10 @@
 package com.adopt.test.services;
 
-import com.adopt.test.domain.dto.AnimalDto;
-import com.adopt.test.domain.dto.AnimalDtoReponse;
-import com.adopt.test.domain.model.Animal;
-import com.adopt.test.repositories.AnimalRepository;
+import com.adopt.test.domain.dto.animal.AnimalDto;
+import com.adopt.test.domain.dto.animal.AnimalDtoReponse;
+import com.adopt.test.domain.model.animal.Animal;
+import com.adopt.test.repositories.animal.AnimalRepository;
+import com.adopt.test.services.animal.AnimalServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -15,7 +16,6 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.hamcrest.Matchers.any;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
 @ExtendWith(MockitoExtension.class)

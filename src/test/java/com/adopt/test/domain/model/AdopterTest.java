@@ -1,5 +1,6 @@
 package com.adopt.test.domain.model;
 
+import com.adopt.test.domain.model.adopter.Adopter;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;

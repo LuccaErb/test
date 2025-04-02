@@ -69,6 +69,7 @@ spring.datasource.password=senhadoseubanco
 
 ### Rodar dockerizado: 
 
+
 ## Endpoints:
 `http://localhost:8080 + endpoint` 
 1. Animais:
