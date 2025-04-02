@@ -19,28 +19,29 @@ public class AdopterController {
         this.service = service;
     }
 
-
+    //get
     @GetMapping
     public ResponseEntity<List<AdopterDto>> getAllAdopters() {
         return ResponseEntity.status(HttpStatus.OK).body(service.listAllAdoperts());
     }
 
-
+    //get by id
     @GetMapping("/{id}")
     public ResponseEntity<AdopterDto> getAdopterById(@PathVariable Long id){
         return ResponseEntity.status(HttpStatus.OK).body(service.getAdopterById(id));
     }
-
+    //post
     @PostMapping
     public ResponseEntity<AdopterDtoResponse> addAdopter(@RequestBody AdopterDto adopterDto){
         return ResponseEntity.status(HttpStatus.CREATED).body(service.addAdopter(adopterDto));
     }
-
+    //delete
     @DeleteMapping("/{id}")
     public ResponseEntity<String> deleteAdopter(@PathVariable Long id){
         return ResponseEntity.status(HttpStatus.OK).body(service.deleteAdopter(id).getBody());
     }
 
+    //put
     @PutMapping("/{id}")
     public ResponseEntity<AdopterDtoResponse> updateAdopter(@PathVariable Long id, @RequestBody AdopterDto adopterDto){
         return ResponseEntity.status(HttpStatus.OK).body(service.updateAdopter(id, adopterDto));

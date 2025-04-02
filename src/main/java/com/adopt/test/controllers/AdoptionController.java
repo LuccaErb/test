@@ -32,6 +32,7 @@ public class AdoptionController {
     }
     @GetMapping("/by-adopter-id/{id}")
     public ResponseEntity<List<AdoptionDto>> getAdoptionByAdopterId(@PathVariable Long id) {
+
         return ResponseEntity.status(HttpStatus.OK).body(service.getAdoptionByAdopterId(id));
     }
 
@@ -40,14 +41,11 @@ public class AdoptionController {
         return ResponseEntity.status(HttpStatus.CREATED).body(service.addAdoption(animalId, adopterId));
 
     }
-    @PutMapping("/{id}")
-    public ResponseEntity<AdoptionDtoResponse> updateAdoption(@PathVariable Long id, @RequestBody AdoptionDto adoptionDto) {
-        return ResponseEntity.status(HttpStatus.OK).body(service.updateAdoption(id, adoptionDto));
-    }
+
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void deleteAdoption(@PathVariable Long id) {
-        service.deleteAdoption(id);
+    public ResponseEntity<String> cancelAdoption(@PathVariable Long id) {
+        return ResponseEntity.status(HttpStatus.OK).body(service.cancelAdoption(id).getBody());
     }
 
 }

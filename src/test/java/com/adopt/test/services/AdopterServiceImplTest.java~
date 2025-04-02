@@ -41,7 +41,18 @@ class AdopterServiceImplTest {
         assertEquals("nome", result.get(0).getName());
     }
 
+    @Test
+    void getAdopterById() {
 
+        Adopter adopter = new Adopter("nome", "cpf", "birth", "address", "email", "phone");
+        when(repository.findById(1L)).thenReturn(Optional.of(adopter));
+
+
+        AdopterDto result = service.getAdopterById(1L);
+
+
+        assertEquals("nome", result.getName());
+    }
 
     @Test
     void addAdopter() {

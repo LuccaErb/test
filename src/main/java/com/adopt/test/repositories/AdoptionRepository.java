@@ -15,7 +15,6 @@ import java.util.Optional;
 public interface AdoptionRepository extends JpaRepository<Adoption, Long> {
     long countByAdopterIdAndDateReturnIsNull(Long adopterId);
     boolean existsByAnimalId(Long animalId);
-
     List<Adoption> findByAdopterId(Long id);
 }
 

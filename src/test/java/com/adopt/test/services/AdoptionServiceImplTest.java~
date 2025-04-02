@@ -84,7 +84,7 @@ class AdoptionServiceImplTest {
 
     @Test
     void getAdoptionByAdopterId() {
-
+        
 
     }
 

@@ -1,0 +1,59 @@
+package com.adopt.test.domain.model;
+
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+class AnimalTest {
+
+
+
+    @Test
+    void getName() {
+        Animal animal = new Animal( "nome", "espécie", "raça", "idade", true);
+        assertEquals("nome", animal.getName());
+    }
+
+    @Test
+    void getSpecies() {
+    }
+
+    @Test
+    void getRace() {
+    }
+
+    @Test
+    void getAge() {
+    }
+
+    @Test
+    void getStatus() {
+    }
+
+
+    @Test
+    void setId() {
+    }
+
+    @Test
+    void setName() {
+    }
+
+    @Test
+    void setSpecies() {
+    }
+
+    @Test
+    void setRace() {
+    }
+
+    @Test
+    void setAge() {
+    }
+
+    @Test
+    void setStatus() {
+    }
+
+
+}

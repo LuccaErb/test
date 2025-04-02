@@ -1,10 +1,7 @@
 package com.adopt.test.controllers;
-
 import com.adopt.test.domain.dto.AnimalDto;
-
 import com.adopt.test.domain.dto.AnimalDtoReponse;
 import com.adopt.test.services.AnimalService;
-
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -39,6 +36,8 @@ public class AnimalController {
     public ResponseEntity<AnimalDto> getAnimalById(@PathVariable Long id) {
 
         return ResponseEntity.status(HttpStatus.OK).body(service.getAnimalById(id));
+
+
     }
 
     @DeleteMapping("/{id}")

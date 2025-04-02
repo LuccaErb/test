@@ -58,6 +58,8 @@ class AnimalServiceImplTest {
 
     @Test
     void getAnimalById() {
+        when(animalRepository.save(Mockito.any(Animal.class))).thenReturn(animal);
+
         when(animalRepository.existsById(1L)).thenReturn(true);
         when(animalRepository.findById(Mockito.any(Long.class))).thenReturn(java.util.Optional.ofNullable(animal));
 

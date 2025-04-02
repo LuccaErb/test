@@ -7,13 +7,16 @@ import com.adopt.test.domain.model.Adoption;
 import com.adopt.test.domain.model.Animal;
 import com.adopt.test.exceptions.AdoptionLimitExceededException;
 import com.adopt.test.exceptions.AnimalAlreadyAdoptedException;
+import com.adopt.test.exceptions.MissingParameterException;
 import com.adopt.test.repositories.AdopterRepository;
 import com.adopt.test.repositories.AdoptionRepository;
 import com.adopt.test.repositories.AnimalRepository;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
+
 import lombok.RequiredArgsConstructor;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -49,7 +52,7 @@ public class AdoptionServiceImpl implements AdoptionService {
 
         }
         if (!adopterRepository.existsById(id)) {
-            throw new EntityNotFoundException("Adopter nao encontrado");
+            throw new EntityNotFoundException("Adotador nao encontrado");
         }
         return adoptionRepository.findByAdopterId(id).stream()
                 .map(AdoptionDto::new)
@@ -60,6 +63,11 @@ public class AdoptionServiceImpl implements AdoptionService {
     @Override
     @Transactional
     public AdoptionDtoResponse addAdoption(Long animalId, Long adopterId) {
+
+        if (animalId == null || adopterId == null) {
+            throw new MissingParameterException("Os parâmetros 'animalId' e 'adopterId' não podem ser nulos.");
+        }
+
         Animal animal = animalRepository.findById(animalId)
                 .orElseThrow(() -> new EntityNotFoundException("Animal não encontrado!"));
 
@@ -84,34 +92,26 @@ public class AdoptionServiceImpl implements AdoptionService {
 
     }
 
-    @Override
-    @Transactional
-    public AdoptionDtoResponse updateAdoption(Long id, AdoptionDto adoptionDto) {
-        Adoption adoption = adoptionRepository.findById(id)
-                .orElseThrow(() -> new EntityNotFoundException("Adoção não encontrada!"));
+@Override
+@Transactional
+public ResponseEntity<String> cancelAdoption(Long id) {
 
-        adoption.setDateReturn(adoptionDto.getDateReturn());
-        if (adoptionDto.getDateReturn() != null) {
-            adoption.getAnimal().setStatus(true);
-            animalRepository.save(adoption.getAnimal());
-        }
+    Adoption adoption = adoptionRepository.findById(id)
+            .orElseThrow(() -> new EntityNotFoundException("Adoção não encontrada!"));
 
 
+    Animal animal = adoption.getAnimal();
+    Adopter adopter = adoption.getAdopter();
 
-        adoptionRepository.save(adoption);
-        return new AdoptionDtoResponse(adoption);
-    }
 
-    @Override
-    @Transactional
-    public void deleteAdoption(Long id) {
-        Adoption adoption = adoptionRepository.findById(id)
-                .orElseThrow(() -> new EntityNotFoundException("Adoção não encontrada!"));
+    adoptionRepository.delete(adoption);
 
-        adoption.getAnimal().setStatus(true);
-        animalRepository.save(adoption.getAnimal());
 
-        adoptionRepository.delete(adoption);
-    }
+    animal.setStatus(true);
+    animal.setAdoption(null);
+    animalRepository.save(animal);
+
+    return ResponseEntity.ok("Adoção cancelada com sucesso!");
+}
 
 }

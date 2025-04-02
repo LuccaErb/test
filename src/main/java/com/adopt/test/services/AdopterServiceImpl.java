@@ -16,12 +16,12 @@ import java.util.List;
 public class AdopterServiceImpl implements AdopterService {
     private final AdopterRepository repository;
 
-    //listando todos os adotantes
+
     @Override
     public List<AdopterDto> listAllAdoperts() {
         return repository.findAll().stream().map(AdopterDto::new).toList();
     }
-    //buscando adotante especifico
+
     @Override
     public AdopterDto getAdopterById(Long id) {
         if (!id.toString().matches("\\d+")) {
@@ -29,22 +29,23 @@ public class AdopterServiceImpl implements AdopterService {
 
         }
         if (!repository.existsById(id)) {
-            throw new EntityNotFoundException("Adopter nao encontrado");
+            throw new EntityNotFoundException("Adotante nao encontrado");
         }
         return repository.findById(id).map(AdopterDto::new).orElseThrow(() -> new EntityNotFoundException("Adopter não encontrado"));
     }
 
-    //criando adotante por meio do dto
+
     @Override
     public AdopterDtoResponse addAdopter(AdopterDto adopterDto) {
-        if (!adopterDto.getName().matches("[a-zA-Z]+") ){
+        if (!adopterDto.getName().matches("[a-zA-Z ]+") ){
             throw new InvalidDataException("O nome do animal deve conter apenas letras!");
         }
+
         Adopter adopter = new Adopter(adopterDto.getName(), adopterDto.getCpf(), adopterDto.getBirth(), adopterDto.getAddress(), adopterDto.getEmail(), adopterDto.getPhone());
         repository.save(adopter);
         return new AdopterDtoResponse(adopter);
     }
-    //deletando adotante
+
     @Override
     public ResponseEntity<String> deleteAdopter(Long id) {
         if (!repository.existsById(id)) {
@@ -59,7 +60,7 @@ public class AdopterServiceImpl implements AdopterService {
         Adopter adopter = repository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Adotante não encontrado"));
 
-        // Atualizando informações
+
         if (adopterDto.getName() != null) {
             adopter.setName(adopterDto.getName());
         }
