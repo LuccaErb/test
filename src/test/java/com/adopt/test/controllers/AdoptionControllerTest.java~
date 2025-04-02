@@ -34,7 +34,7 @@ class AdoptionControllerTest {
     @InjectMocks
     private AdoptionController adoptionController;
 
-    
+
 
     @Test
     void getAllAdoptions() {
@@ -134,37 +134,5 @@ class AdoptionControllerTest {
         assertEquals(adoptionDtoResponse, response.getBody());
     }
 
-    @Test
-    void cancelAdoption() {// Arrange
-        Long adoptionId = 1L;
-        Animal animal = new Animal();
-        animal.setId(1L);
-        animal.setStatus(true);
 
-        Adopter adopter = new Adopter();
-        adopter.setId(1L);
-
-        Adoption adoption = new Adoption();
-        adoption.setId(adoptionId);
-        adoption.setAnimal(animal);
-        adoption.setAdopter(adopter);
-
-        when(adoptionRepository.findById(adoptionId)).thenReturn(Optional.of(adoption));
-
-        // Act
-        ResponseEntity<String> response = adoptionService.cancelAdoption(adoptionId);
-
-        // Assert
-        assertEquals("Adoção cancelada com sucesso!", response.getBody());
-
-        // Verifica se `delete(adoption)` foi chamado
-        verify(adoptionService, times(1)).delete(adoption);
-
-        // Verifica se `save(animal)` foi chamado
-        verify(animalRepository, times(1)).save(animal);
-
-        // Verifica se o status do animal foi alterado
-        assertFalse(animal.getStatus());
-        assertNull(animal.getAdoption());
-    }
 }

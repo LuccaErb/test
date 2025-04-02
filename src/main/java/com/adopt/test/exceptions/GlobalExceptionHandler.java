@@ -1,7 +1,9 @@
 package com.adopt.test.exceptions;
 
 import lombok.Data;
+import org.hibernate.TransientObjectException;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.dao.InvalidDataAccessApiUsageException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MissingPathVariableException;
@@ -34,6 +36,13 @@ public class GlobalExceptionHandler {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Animal não encontrado");
         } else if (e instanceof MissingServletRequestParameterException) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Verifique se os parametros da URL estao preenchidos corretamente" );
+
+        } else if (e instanceof InvalidDataAccessApiUsageException) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Erro ao executar operacao");
+
+        }
+        if (e instanceof TransientObjectException) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Erro ao deletar " + e.getMessage());
 
         } else {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Erro interno no servidor: " + e.getMessage());

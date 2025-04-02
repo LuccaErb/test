@@ -1,0 +1,22 @@
+package com.adopt.test.controllers;
+
+import com.adopt.test.domain.dto.AdopterDto;
+import com.adopt.test.domain.dto.AdopterDtoResponse;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
+
+import java.util.List;
+
+public interface AdopterControllerInterface {
+
+     ResponseEntity<List<AdopterDto>> getAllAdopters();
+
+     ResponseEntity<AdopterDto> getAdopterById(@PathVariable Long id);
+
+     ResponseEntity<AdopterDtoResponse> addAdopter(@RequestBody AdopterDto adopterDto);
+
+     ResponseEntity<String> deleteAdopter(@PathVariable Long id);
+
+     ResponseEntity<AdopterDtoResponse> updateAdopter(@PathVariable Long id, @RequestBody AdopterDto adopterDto);
+}

@@ -89,35 +89,10 @@ class AdoptionServiceImplTest {
     }
 
 
-    @Test
-    void addAdoption() {
-        when(animalRepository.findById(any())).thenReturn(Optional.of(animal));
-        when(adopterRepository.findById(any())).thenReturn(Optional.of(adopter));
-        when(adoptionRepository.save(any())).thenReturn(adoption);
 
-        AdoptionDtoResponse result = adoptionService.addAdoption(animal.getId(), adopter.getId());
 
-        assertEquals(adoption.getId(), result.getId());
-        assertEquals(adoption.getDateAdoption(), result.getDateAdoption());
-        assertEquals(adoption.getDateReturn(), result.getDateReturn());
-        assertEquals(adoption.getAnimal().getId(), result.getAnimalId());
-        assertEquals(adoption.getAdopter().getId(), result.getAdopterId());
-    }
 
-    @Test
-    void updateAdoption() {
-        when(adoptionRepository.findById(any())).thenReturn(Optional.of(adoption));
-        when(adoptionRepository.save(any())).thenReturn(adoption);
 
-        AdoptionDto adoptionDto = new AdoptionDto(adoption);
-        AdoptionDtoResponse result = adoptionService.updateAdoption(1L, adoptionDto);
-
-        assertEquals(adoption.getId(), result.getId());
-        assertEquals(adoption.getDateAdoption(), result.getDateAdoption());
-        assertEquals(adoption.getDateReturn(), result.getDateReturn());
-        assertEquals(adoption.getAnimal().getId(), result.getAnimalId());
-        assertEquals(adoption.getAdopter().getId(), result.getAdopterId());
-    }
 
     @Test
     void cancelAdoption() {

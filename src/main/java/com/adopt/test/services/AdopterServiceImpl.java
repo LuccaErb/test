@@ -7,6 +7,7 @@ import com.adopt.test.exceptions.InvalidDataException;
 import com.adopt.test.repositories.AdopterRepository;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
+import org.hibernate.TransientObjectException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
@@ -53,19 +54,19 @@ public class AdopterServiceImpl implements AdopterService {
         }
         repository.deleteById(id);
         return ResponseEntity.ok().body("Adotante deletado com sucesso");
+
+
     }
     //update por id adotante
     @Override
     public AdopterDtoResponse updateAdopter(Long id, AdopterDto adopterDto) {
+
+
         Adopter adopter = repository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Adotante não encontrado"));
 
-
         if (adopterDto.getName() != null) {
             adopter.setName(adopterDto.getName());
-        }
-        if (adopterDto.getCpf() != null) {
-            adopter.setCpf(adopterDto.getCpf());
         }
         if (adopterDto.getBirth() != null) {
             adopter.setBirth(adopterDto.getBirth());

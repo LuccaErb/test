@@ -11,7 +11,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/adoption")
-public class AdoptionController {
+public class AdoptionController implements AdoptionControllerAPI {
     private final AdoptionService service;
 
 

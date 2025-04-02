@@ -10,7 +10,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/animals")
-public class AnimalController {
+public class AnimalController implements AnimalControllerAPI{
 
     private final AnimalService service;
 

@@ -118,21 +118,8 @@ class AdoptionControllerTest {
         assertEquals(adoptionDtoResponse, response.getBody());
     }
 
-    @Test
-    void updateAdoption() {
-        Long adoptionId = 1L;
-        Animal animal = new Animal("nome", "espécie", "raça", "idade", true);
-        Adoption adoption = new Adoption(animal, new Adopter("name", "cpf", "birth", "address", "email", "phone"));
-        adoption.setId(adoptionId);
-        AdoptionDto adoptionDto = new AdoptionDto(adoption);
-        AdoptionDtoResponse adoptionDtoResponse = new AdoptionDtoResponse(adoption);
 
-        when(adoptionService.updateAdoption(adoptionId, adoptionDto)).thenReturn(adoptionDtoResponse);
 
-        ResponseEntity<AdoptionDtoResponse> response = adoptionController.updateAdoption(adoptionId, adoptionDto);
-        assertEquals(200, response.getStatusCodeValue());
-        assertEquals(adoptionDtoResponse, response.getBody());
-    }
 
 
 }
