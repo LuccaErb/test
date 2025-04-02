@@ -70,7 +70,7 @@ spring.datasource.password=senhadoseubanco
 ### Rodar dockerizado: 
 
 ## Endpoints:
-`http://localhost:8080`+`Endpoints`
+`http://localhost:8080 + endpoint` 
 1. Animais:
    - `POST` /animals - Cria um novo animal para adotação.
    - `GET` /animals - Lista todos os animais disponíveis.

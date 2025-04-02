@@ -55,7 +55,7 @@
 
    build as dependências do projeto 
 
-3. Cofigure as credenciais do banco de dados no arquivo `application.properties`.
+3. Configure as credenciais do banco de dados no arquivo `application.properties`.
 ```bash
 spring.application.name=test
 spring.datasource.url=jdbc:postgresql://localhost:porta/nomedoseubanco
