@@ -1,4 +1,0 @@
-package com.adopt.test.exceptions;
-
-public class AnimalAlreadyAdoptedException extends RuntimeException{
-}

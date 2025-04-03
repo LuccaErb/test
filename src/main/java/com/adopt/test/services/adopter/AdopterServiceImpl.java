@@ -1,9 +1,10 @@
 package com.adopt.test.services.adopter;
 
+import com.adopt.test.common.exceptions.Exception;
+import com.adopt.test.common.messageError.MessageError;
 import com.adopt.test.domain.dto.adopter.AdopterDto;
 import com.adopt.test.domain.dto.adopter.AdopterDtoResponse;
 import com.adopt.test.domain.model.adopter.Adopter;
-import com.adopt.test.exceptions.InvalidDataException;
 import com.adopt.test.repositories.adopter.AdopterRepository;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
@@ -25,20 +26,20 @@ public class AdopterServiceImpl implements AdopterService {
     @Override
     public AdopterDto getAdopterById(Long id) {
         if (!id.toString().matches("\\d+")) {
-            throw new EntityNotFoundException("O ID deve ser um número!");
+            throw new EntityNotFoundException(MessageError.ADOPTER_NOT_FOUND.getMessage());
 
         }
         if (!repository.existsById(id)) {
-            throw new EntityNotFoundException("Adotante nao encontrado");
+            throw new EntityNotFoundException(MessageError.ADOPTER_NOT_FOUND.getMessage());
         }
-        return repository.findById(id).map(AdopterDto::new).orElseThrow(() -> new EntityNotFoundException("Adopter não encontrado"));
+        return repository.findById(id).map(AdopterDto::new).orElseThrow(() -> new EntityNotFoundException(MessageError.ADOPTER_NOT_FOUND.getMessage()));
     }
 
 
     @Override
     public AdopterDtoResponse addAdopter(AdopterDto adopterDto) {
         if (!adopterDto.getName().matches("[a-zA-Z ]+") ){
-            throw new InvalidDataException("O nome do animal deve conter apenas letras!");
+            throw new Exception(MessageError.ADOPTER_NOT_FOUND);
         }
 
         Adopter adopter = new Adopter(adopterDto.getName(), adopterDto.getCpf(), adopterDto.getBirth(), adopterDto.getAddress(), adopterDto.getEmail(), adopterDto.getPhone());
@@ -49,7 +50,7 @@ public class AdopterServiceImpl implements AdopterService {
     @Override
     public ResponseEntity<String> deleteAdopter(Long id) {
         if (!repository.existsById(id)) {
-            throw new EntityNotFoundException("Adotante nao encontrado");
+            throw new EntityNotFoundException(MessageError.ADOPTER_NOT_FOUND.getMessage());
         }
         repository.deleteById(id);
         return ResponseEntity.ok().body("Adotante deletado com sucesso");
@@ -62,7 +63,7 @@ public class AdopterServiceImpl implements AdopterService {
 
 
         Adopter adopter = repository.findById(id)
-                .orElseThrow(() -> new EntityNotFoundException("Adotante não encontrado"));
+                .orElseThrow(() -> new EntityNotFoundException(MessageError.ADOPTER_NOT_FOUND.getMessage()));
 
         if (adopterDto.getName() != null) {
             adopter.setName(adopterDto.getName());

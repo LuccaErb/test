@@ -49,20 +49,20 @@ public class AnimalServiceImpl implements AnimalService {
 
 
         if (id == null || !id.toString().matches("\\d+")) {
-            throw new IllegalArgumentException(MessageError.ANIMAL_NOT_FOUND.getMessage());
+            throw new IllegalArgumentException("O ID precisa ser informado na URL. Exemplo: /animals/{id}");
         }
         if (!repository.existsById(id)) {
-            throw new EntityNotFoundException(MessageError.ANIMAL_NOT_FOUND.getMessage());
+            throw new EntityNotFoundException("Animal não encontrado");
         }
 
-        return repository.findById(id).map(AnimalDto::new).orElseThrow(() -> new EntityNotFoundException(MessageError.ANIMAL_NOT_FOUND.getMessage()));
+        return repository.findById(id).map(AnimalDto::new).orElseThrow(() -> new EntityNotFoundException("Animal não encontrado"));
     }
 
     //delete
     @Override
     public ResponseEntity<String> deleteAnimal(Long id) {
         if ( !repository.existsById(id)) {
-            throw new EntityNotFoundException(MessageError.ANIMAL_NOT_FOUND.getMessage());
+            throw new EntityNotFoundException("Animal nao encontrado");
         }
         repository.deleteById(id);
         return ResponseEntity.ok().body("Animal deletado com sucesso");
@@ -71,7 +71,7 @@ public class AnimalServiceImpl implements AnimalService {
     @Override
     public AnimalDtoReponse updateAnimal(Long id, AnimalDto animalDto) {
         Animal animal = repository.findById(id)
-                .orElseThrow(()-> new EntityNotFoundException(MessageError.ANIMAL_NOT_FOUND.getMessage()));
+                .orElseThrow(()-> new EntityNotFoundException("Animal nao encontrado"));
 
         if (animalDto.getName() != null && !animalDto.getName().trim().isEmpty()) {
             animal.setName(animalDto.getName());

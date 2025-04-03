@@ -69,6 +69,13 @@ spring.datasource.password=senhadoseubanco
 
 ### Rodar dockerizado: 
 
+```bash
+docker-compose up -d --build
+```
+###
+
+
+
 ## Endpoints:
 `http://localhost:8080 + endpoint` 
 1. Animais:

@@ -1,0 +1,4 @@
+package com.adopt.test.common.exceptions;
+
+public class ConflictException extends RuntimeException {
+}

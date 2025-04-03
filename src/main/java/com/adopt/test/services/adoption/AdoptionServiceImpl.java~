@@ -1,6 +1,6 @@
 package com.adopt.test.services.adoption;
 
-import com.adopt.test.common.exceptions.Exception;
+import com.adopt.test.common.exceptions.AnimalException;
 import com.adopt.test.common.exceptions.LimiteExceededException;
 import com.adopt.test.common.messageError.MessageError;
 import com.adopt.test.domain.dto.adoption.AdoptionDto;
@@ -64,7 +64,7 @@ public class AdoptionServiceImpl implements AdoptionService {
     public AdoptionDtoResponse addAdoption(Long animalId, Long adopterId) {
 
         if (animalId == null || adopterId == null) {
-            throw new Exception(MessageError.ADOPTER_NOT_FOUND);
+            throw new AnimalException(MessageError.ADOPTER_NOT_FOUND);
         }
 
         Animal animal = animalRepository.findById(animalId)
@@ -75,7 +75,7 @@ public class AdoptionServiceImpl implements AdoptionService {
 
 
         if (adoptionRepository.existsByAnimalId(animalId)) {
-            throw new Exception(MessageError.ANIMAL_ALREADY_ADOPTED);
+            throw new AnimalException(MessageError.ANIMAL_ALREADY_ADOPTED);
         }
         if (adoptionRepository.countByAdopterIdAndDateReturnIsNull(adopterId) >= 3) {
             throw new LimiteExceededException(MessageError.ADOPTION_LIMIT_EXCEEDED);
