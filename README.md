@@ -71,7 +71,7 @@ spring.datasource.password=senhadoseubanco
 
 ```bash
 docker-compose up -d --build
-docker-compose up app
+
 ```
 ###
 
